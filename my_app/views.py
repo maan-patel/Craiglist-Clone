@@ -39,7 +39,7 @@ def new_search(request):
             post_image_url = BASE_IMAGE_URL.format(post_image_id)
             print(post_image_url)
         else:
-            post_image_url = 'https://craigslist.org/images/peace.jpg'
+            post_image_url = 'https://image.shutterstock.com/image-vector/no-image-available-vector-illustration-260nw-744886198.jpg'
 
         final_postings.append((post_title, post_url, post_price, post_image_url))
 
