@@ -25,7 +25,7 @@ def new_search(request):
     soup = BeautifulSoup(data, features='html.parser')
 
     post_listings = soup.find_all('li', {'class': 'result-row'})
-
+    print(soup)
     final_postings = []
 
     for post in post_listings:
