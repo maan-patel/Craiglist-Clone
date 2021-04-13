@@ -4,9 +4,11 @@ from requests.compat import quote_plus
 # from urllib.parse import quote_plus
 from bs4 import BeautifulSoup
 from .import models
-
-BASE_CRAIGSLIST_URL = 'https://toronto.craigslist.org/search/?query={}'
 BASE_IMAGE_URL = 'https://images.craigslist.org/{}_300x300.jpg'
+BASE_CRAIGSLIST_URL = 'https://{}.craigslist.org/search/?query={}'
+    
+
+
 
 # Create your views here.
 def home(request):
@@ -14,9 +16,10 @@ def home(request):
 
 
 def new_search(request):
+    location = request.POST.get('location')
     search = request.POST.get('search')
     models.Search.objects.create(search=search)
-    final_url = BASE_CRAIGSLIST_URL.format(quote_plus(search))
+    final_url = BASE_CRAIGSLIST_URL.format(location.lower(), quote_plus(search))
     response = requests.get(final_url)
     data = response.text
     soup = BeautifulSoup(data, features='html.parser')
@@ -37,9 +40,8 @@ def new_search(request):
         if post.find(class_='result-image').get('data-ids'):
             post_image_id = post.find(class_='result-image').get('data-ids').split(',')[0].split(':')[1]
             post_image_url = BASE_IMAGE_URL.format(post_image_id)
-            print(post_image_url)
         else:
-            post_image_url = 'https://image.shutterstock.com/image-vector/no-image-available-vector-illustration-260nw-744886198.jpg'
+            post_image_url = 'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg'
 
         final_postings.append((post_title, post_url, post_price, post_image_url))
 

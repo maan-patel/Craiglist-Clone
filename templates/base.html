@@ -26,7 +26,7 @@
 
 
 <div class="container">
-    <h3 style="text-align: center">Feel free to search for something on Craiglist and get a better view!</h3>
+    <h3 class="blue-text text-darken-2" style="text-align: center">Feel free to search for something on Craiglist and get a better view!</h3>
     <div class="row">
         <div class="col s4">
             <!-- Promo Content 1 goes here -->
@@ -57,8 +57,67 @@
     </div>
 
 
+
+
+
 <form action="{% url 'new_search' %}" method = 'post'>
     {% csrf_token %}
+
+    <div class="input-field col s12 m6">
+        <div class="select-wrapper">
+    <select name = 'location'>
+      <optgroup label="North America">
+          <option>Toronto</option>
+          <option>Boston</option>
+          <option>Chicago</option>
+          <option>LosAngeles</option>
+          <option>Miami</option>
+          <option>Montreal</option>
+          <option>NewYork</option>
+          <option>Seattle</option>
+          <option>SFBay</option>
+          <option>Vancouver</option> 
+          <option>WashingtonDC</option>
+          <option>Niagara</option>
+          <option>Guelph</option>
+          <option>Montreal</option>
+  </optgroup>
+      <optgroup label="Middle East">
+          <option>Dubai</option>
+          <option>Beirut</option>
+          <option>Cario</option>
+          <option>Haifa</option>
+          <option>Jerusalem</option>
+          <option>Pakistan</option>
+
+  </optgroup>
+  <optgroup label="Europe">
+          <option>Amsterdam</option>
+          <option>Berlin</option>
+          <option>Brussels</option>
+          <option>Budapest</option>
+          <option>Copenhagen</option>
+          <option>Cotedazur</option>
+          <option>Dublin</option>
+          <option>Edinburgh</option>
+          <option>Florence</option>
+          <option>London</option>
+          <option>Oslo</option>
+          <option>Munich</option>
+          <option>Oxford</option>
+          <option>Paris</option>
+          <option>Prague</option>
+          <option>Rome</option>
+          <option>Stockholm</option>
+          <option>Venice</option>
+  </optgroup>
+    </select>
+            </div>
+    <label>Location</label>
+  </div>
+
+
+
     <input type="text" name = 'search' placeholder="Search for a listing">
 
   <button class="btn waves-effect waves-light" type="submit" name="action">Submit
@@ -71,7 +130,20 @@
 
     {% endblock content %}
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
 
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
